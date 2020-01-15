@@ -12,23 +12,21 @@ class _BuildingState extends State<Building> {
   // Field
   String nameLogin = '...';
 
-
   // Method
   @override
-  void initState(){
+  void initState() {
     super.initState();
     findDataLogin();
   }
 
-  Future<String> findUrlAPI()async{
+  Future<String> findUrlAPI() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String user = sharedPreferences.getString('User');
     String url = '${MyConstant().urlHost}api/users/getuser/$user';
     return url;
   }
 
-  Future<void> findDataLogin()async{
-
+  Future<void> findDataLogin() async {
     String url = await findUrlAPI();
     print('url = $url');
 
@@ -43,9 +41,51 @@ class _BuildingState extends State<Building> {
       });
       print('nameLogin = $nameLogin');
     }
-
-
   }
+
+  Widget menuListProduct() {
+    return ListTile(
+      leading: Icon(Icons.filter_1),
+      title: Text('List Product'),
+      subtitle: Text('Descrip List Product'),
+      onTap: () {
+        Navigator.of(context).pop();
+      },
+    );
+  }
+
+  Widget menuInformation() {
+    return ListTile(
+      leading: Icon(Icons.filter_2),
+      title: Text('Information'),
+      subtitle: Text('Descrip Information'),
+      onTap: () {
+        Navigator.of(context).pop();
+      },
+    );
+  }
+
+  Widget menuSignOut() {
+    return ListTile(
+      leading: Icon(
+        Icons.exit_to_app,
+        color: Colors.red,
+      ),
+      title: Text(
+        'Sign Out',
+        style: TextStyle(color: Colors.red),
+      ),
+      subtitle: Text(
+        'Sign Out and Back to Authen Page',
+        style: TextStyle(color: Colors.red.shade300),
+      ),onTap: (){
+        Navigator.of(context).pop();
+
+      },
+    );
+  }
+
+  
 
   Widget showNameLogin() {
     return Text('Login by $nameLogin');
@@ -69,7 +109,8 @@ class _BuildingState extends State<Building> {
   Widget showHead() {
     return DrawerHeader(
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage('images/wall.jpg'),fit: BoxFit.cover),
+        image: DecorationImage(
+            image: AssetImage('images/wall.jpg'), fit: BoxFit.cover),
       ),
       child: Column(
         children: <Widget>[
@@ -86,6 +127,9 @@ class _BuildingState extends State<Building> {
       child: ListView(
         children: <Widget>[
           showHead(),
+          menuListProduct(),
+          menuInformation(),
+          menuSignOut(),
         ],
       ),
     );
