@@ -37,6 +37,13 @@ class _BuildingState extends State<Building> {
     var result = response.data['data'];
     print('result = $result');
 
+    for (var map in result) {
+      setState(() {
+        nameLogin = map['name'];
+      });
+      print('nameLogin = $nameLogin');
+    }
+
 
   }
 
