@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ungbuilding/utility/my_style.dart';
 
@@ -12,6 +13,7 @@ class AddProduct extends StatefulWidget {
 class _AddProductState extends State<AddProduct> {
   // Field
   File file;
+  double lat, lng;
 
   // Method
   Widget nameForm() {
@@ -90,6 +92,29 @@ class _AddProductState extends State<AddProduct> {
     );
   }
 
+  Widget showMap() {
+    if (lat == null) {
+      lat = 13.673499;
+      lng = 100.606896;
+    }
+
+    LatLng latLng = LatLng(lat, lng);
+    CameraPosition cameraPosition = CameraPosition(
+      target: latLng,
+      zoom: 16.0,
+    );
+
+    return Container(
+      height: MediaQuery.of(context).size.width,
+      width: MediaQuery.of(context).size.width,
+      child: GoogleMap(
+        initialCameraPosition: cameraPosition,
+        mapType: MapType.normal,
+        onMapCreated: (GoogleMapController googleMapController) {},
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,6 +129,7 @@ class _AddProductState extends State<AddProduct> {
           showButton(),
           nameForm(),
           detailForm(),
+          showMap(),
         ],
       ),
     );
