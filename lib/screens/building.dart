@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ungbuilding/screens/authen.dart';
 import 'package:ungbuilding/utility/my_style.dart';
 
 class Building extends StatefulWidget {
@@ -80,9 +81,17 @@ class _BuildingState extends State<Building> {
         style: TextStyle(color: Colors.red.shade300),
       ),onTap: (){
         Navigator.of(context).pop();
-
+        clearPreferance();
       },
     );
+  }
+
+  Future<void> clearPreferance()async{
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.clear().then((response){
+      MaterialPageRoute materialPageRoute = MaterialPageRoute(builder: (BuildContext buildContext){return Authe();});
+      Navigator.of(context).pushAndRemoveUntil(materialPageRoute, (Route<dynamic> route){return false;});
+    });
   }
 
   
