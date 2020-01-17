@@ -180,7 +180,7 @@ class _BuildingState extends State<Building> {
     return Scaffold(body: currentWidet,
       drawer: showDrawer(),
       appBar: AppBar(
-        backgroundColor: MyStyle().mainColor,
+        backgroundColor: MyStyle().barColor,
         title: searchForm(),
       ),
     );

@@ -104,7 +104,7 @@ class _RegisterState extends State<Register> {
 
   Future<void> registerThread() async {
 
-    String url = 'http://desktop-pkdogbs:3001/api/users/register';
+    String url = '${MyConstant().urlHost}api/users/register';
     Map<String, dynamic> map = Map();
     map['username'] = user;
     map['password'] = password;
@@ -113,6 +113,8 @@ class _RegisterState extends State<Register> {
     map['position'] = 'Sales';
     map['employee_id'] = '999999';
     map['rold_id'] = 1;
+
+    print('mapRegister ======>>>> ${map.toString()}');
 
     try {
 
@@ -147,7 +149,7 @@ class _RegisterState extends State<Register> {
       appBar: AppBar(
         actions: <Widget>[registerButton()],
         title: Text('Register'),
-        backgroundColor: MyStyle().mainColor,
+        backgroundColor: MyStyle().barColor,
       ),
       body: ListView(
         padding: EdgeInsets.all(30.0),
